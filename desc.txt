@@ -1,0 +1,3 @@
+一个后台管理程序
+主要 shiro1.2.5+springmvc4.0.0+mybatis3.4.0 +redis3.1缓存（此版本先不采用分布式dubbo）
+前端采用了dwz
