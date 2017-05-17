@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.roncoo.pay.permission.dao.impl.PmsMenuDaoImpl">
+
+	<sql id="pms_menu"> PMS_MENU </sql>
+	<sql id="pms_role"> PMS_ROLE </sql>
+	<sql id="pms_role_menu"> PMS_MENU_ROLE </sql>
+
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsMenu" keyProperty="id" useGeneratedKeys="true">
+		insert into
+		<include refid="pms_menu" />
+		(id,ver,status,creater,create_time, editor, edit_time, remark,
+		name,url,parent_id,num,is_leaf,lvl,target_name
+		) values
+		( #{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},
+		#{name,jdbcType=VARCHAR},
+		#{url,jdbcType=VARCHAR},
+		#{parent.id,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR},
+		#{isLeaf,jdbcType=VARCHAR},
+		#{lvl,jdbcType=INTEGER},
+		#{targetName,jdbcType=VARCHAR}
+		)
+	</insert>
+
+	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsMenu">
+		update
+		<include refid="pms_menu" />
+		<set>
+			ver = #{ver}+1,
+			name = #{name,jdbcType=VARCHAR},
+			url = #{url,jdbcType=VARCHAR},
+			parent_id = #{parent.id,jdbcType=VARCHAR},
+			num = #{num,jdbcType=VARCHAR},
+			is_leaf = #{isLeaf,jdbcType=VARCHAR},
+			lvl =#{lvl,jdbcType=INTEGER},
+			target_name = #{targetName,jdbcType=VARCHAR}
+		</set>
+		where ID = #{id} and ver = #{ver}
+	</update>
+
+	<delete id="deleteByPrimaryKey" parameterType="long">
+		delete from
+		<include refid="pms_menu" />
+		where ID = #{id}
+	</delete>
+
+	<select id="selectByPrimaryKey" parameterType="Long" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+		select
+		d.id,d.ver,d.status,d.creater,
+		d.create_time as "createTime", d.editor,
+		d.edit_time as "editTime", d.remark,
+		d.name as "name",
+		d.url as "url",
+		d.parent_id as "parent.id",
+		parent.name as "parent.name",
+		d.num as "num",
+		d.is_leaf as "isLeaf",
+		d.lvl as "lvl",
+		d.target_name as "targetName"
+		from
+		<include refid="pms_menu" />
+		d
+		left join
+		<include refid="pms_menu" />
+		parent
+		on d.parent_id = parent.id
+		where d.id = #{id}
+	</select>
+
+	<select id="listPage" parameterType="java.util.Map" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+		select
+		d.id,d.ver,d.status,d.creater,
+		d.create_time as "createTime", d.editor,
+		d.edit_time as "editTime", d.remark,
+		d.name as "name",
+		d.url as "url",
+		d.parent_id as "parent.id",
+		d.num as "num",
+		d.is_leaf as "isLeaf"，
+		d.lvl as "lvl",
+		d.target_name as "targetName"
+		from
+		<include refid="pms_menu" />
+		as D
+
+	</select>
+
+	<select id="listPageCount" parameterType="java.util.Map" resultType="long">
+		select count(1) from
+		<include refid="pms_menu" />
+		D
+	</select>
+
+	<sql id="condition_sql">
+		<if test="isLeaf != null and isLeaf != ''"> and is_leaf = #{isLeaf}</if>
+		<if test="name != null and name != ''"> and NAME = #{name}</if>
+		<if test="parentId != null and parentId != ''"> and parent_id = #{parentId}</if>
+	</sql>
+
+	<select id="listBy" parameterType="java.util.Map" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+		select * from
+		<include refid="pms_menu" />
+		<where>
+			<include refid="condition_sql" />
+		</where>
+	</select>
+
+	<select id="listByParent" parameterType="Long" resultType="java.util.Map">
+		select
+		m.id,m.ver,m.status,m.creater,
+		m.create_time as "createTime", m.editor,
+		m.edit_time as "editTime", m.remark,
+		m.parent_id as "pId",
+		m.name as "name",
+		m.is_leaf as "isLeaf",
+		m.lvl as "lvl",
+		m.target_name as "targetName"
+		from
+		<include refid="pms_menu" />
+		m
+		<where>
+			<if test="parentid!=null and parentid!=''">
+				and m.parent_id = #{parentId}
+			</if>
+		</where>
+		order by m.num asc
+	</select>
+	<select id="listByParentId" parameterType="long" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+		select
+		id as "id" ,
+		ver as "ver",
+		parent_id as "parent.id",
+		name as "name",
+		is_leaf as "isLeaf",
+		lvl as "lvl",
+		target_name as"targetName"
+		from
+		<include refid="pms_menu" />
+		where parent_id = #{parentId}
+	</select>
+
+	<select id="listByRoleIds" parameterType="string" resultType="java.util.Map">
+		select distinct * from (
+		select
+		m.id as "id",
+		m.ver as "ver",
+		m.parent_id as "pId",
+		m.name as "name",
+		m.is_leaf as "isLeaf",
+		m.lvl as "lvl",
+		m.url as "url",
+		m.target_name as "targetName",
+		m.num as num
+		from
+		<include refid="pms_role" />
+		r
+		left join
+		<include refid="pms_role_menu" />
+		rm
+		on r.id = rm.role_id
+		left join
+		<include refid="pms_menu" />
+		m
+		on rm.menu_id = m.id
+		where r.id in
+		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+		) as mt order by mt.num asc
+	</select>
+
+</mapper>

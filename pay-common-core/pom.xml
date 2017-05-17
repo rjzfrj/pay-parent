@@ -123,11 +123,14 @@
 		<!-- Log libs End -->
 
 		<!-- Mysql libs Begin -->
-		<dependency>
+	<!-- 	<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-
+		</dependency> -->
+		<dependency>
+				<groupId>org.oracle</groupId>
+				<artifactId>oracle</artifactId>
+			</dependency>
 		<dependency>
 			<groupId>commons-dbcp</groupId>
 			<artifactId>commons-dbcp</artifactId>

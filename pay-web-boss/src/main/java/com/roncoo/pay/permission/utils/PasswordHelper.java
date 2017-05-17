@@ -20,7 +20,7 @@ import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.util.ByteSource;
 
-import com.roncoo.pay.permission.entity.ZyppOperator;
+import com.roncoo.pay.permission.entity.PmsOperator;
 
 /**
  * 生成密码工具类
@@ -39,7 +39,7 @@ public class PasswordHelper {
 
 	private static int hashIterations = Integer.valueOf(hashIteration);
 
-	public static void encryptPassword(ZyppOperator pmsOperator) {
+	public static void encryptPassword(PmsOperator pmsOperator) {
 
 		pmsOperator.setsalt(randomNumberGenerator.nextBytes().toHex());
 

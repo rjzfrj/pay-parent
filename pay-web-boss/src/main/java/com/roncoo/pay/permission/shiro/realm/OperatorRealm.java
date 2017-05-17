@@ -35,10 +35,10 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.roncoo.pay.common.core.enums.PublicStatusEnum;
-import com.roncoo.pay.permission.entity.ZyppOperator;
-import com.roncoo.pay.permission.service.ZyppOperatorRoleService;
-import com.roncoo.pay.permission.service.ZyppOperatorService;
-import com.roncoo.pay.permission.service.ZyppRolePermissionService;
+import com.roncoo.pay.permission.entity.PmsOperator;
+import com.roncoo.pay.permission.service.PmsOperatorRoleService;
+import com.roncoo.pay.permission.service.PmsOperatorService;
+import com.roncoo.pay.permission.service.PmsRolePermissionService;
 
 /**
  * 自定义realm .
@@ -50,11 +50,11 @@ import com.roncoo.pay.permission.service.ZyppRolePermissionService;
 public class OperatorRealm extends AuthorizingRealm {
 
 	@Autowired
-	private ZyppOperatorService pmsOperatorService;
+	private PmsOperatorService pmsOperatorService;
 	@Autowired
-	private ZyppOperatorRoleService pmsOperatorRoleService;
+	private PmsOperatorRoleService pmsOperatorRoleService;
 	@Autowired
-	private ZyppRolePermissionService pmsRolePermissionService;
+	private PmsRolePermissionService pmsRolePermissionService;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -65,7 +65,7 @@ public class OperatorRealm extends AuthorizingRealm {
 
 		Subject subject = SecurityUtils.getSubject();
 		Session session = subject.getSession();
-		ZyppOperator operator = (ZyppOperator) session.getAttribute("PmsOperator");
+		PmsOperator operator = (PmsOperator) session.getAttribute("PmsOperator");
 		if (operator == null) {
 			operator = pmsOperatorService.findOperatorByLoginName(loginName);
 			session.setAttribute("PmsOperator", operator);
@@ -101,7 +101,7 @@ public class OperatorRealm extends AuthorizingRealm {
 		}
 
 		// 根据登录名查询操作员
-		ZyppOperator operator = pmsOperatorService.findOperatorByLoginName(loginName);
+		PmsOperator operator = pmsOperatorService.findOperatorByLoginName(loginName);
 
 		if (operator == null) {
 			throw new UnknownAccountException();// 没找到帐号

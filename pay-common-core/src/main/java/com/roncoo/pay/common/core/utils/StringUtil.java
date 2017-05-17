@@ -29,7 +29,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * String字符串工具类.
  * 
- * @author zenghao
+ * 
  */
 public final class StringUtil {
 

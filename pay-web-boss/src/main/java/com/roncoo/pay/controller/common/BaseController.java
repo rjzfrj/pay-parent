@@ -22,13 +22,13 @@ import org.springframework.ui.Model;
 
 import com.roncoo.pay.common.core.dwz.DWZ;
 import com.roncoo.pay.common.core.dwz.DwzAjax;
-import com.roncoo.pay.permission.entity.ZyppOperator;
+import com.roncoo.pay.permission.entity.PmsOperator;
 
 
 /**
  * controller基类
  * ：
- * @author zenghao
+ * 
  */ 
 public abstract class BaseController {
 
@@ -48,8 +48,8 @@ public abstract class BaseController {
 	 * 
 	 * @return
 	 */
-	protected ZyppOperator getPmsOperator() {
-		ZyppOperator operator = (ZyppOperator) this.getSession().getAttribute("PmsOperator");
+	protected PmsOperator getPmsOperator() {
+		PmsOperator operator = (PmsOperator) this.getSession().getAttribute("PmsOperator");
 		return operator;
 	}
 

@@ -28,7 +28,7 @@ import sun.misc.BASE64Encoder;
 /**
  * 加密工具类
  * 
- * @author zenghao
+ * 
  */
 public class EncryptUtil {
 

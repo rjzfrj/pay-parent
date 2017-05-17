@@ -23,7 +23,7 @@ import java.util.Map;
 /**
  * 公共枚举. 针对只有“是”，“否”两种状态
  * 
- * @author zenghao
+ * 
  */
 public enum PublicEnum {
 

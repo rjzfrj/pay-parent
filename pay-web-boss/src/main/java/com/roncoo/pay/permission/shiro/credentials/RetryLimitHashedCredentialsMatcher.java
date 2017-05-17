@@ -28,8 +28,8 @@ import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.roncoo.pay.permission.entity.ZyppOperator;
-import com.roncoo.pay.permission.service.ZyppOperatorService;
+import com.roncoo.pay.permission.entity.PmsOperator;
+import com.roncoo.pay.permission.service.PmsOperatorService;
 
 /**
  * 自定义的市容凭证匹配器
@@ -41,7 +41,7 @@ import com.roncoo.pay.permission.service.ZyppOperatorService;
 public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher {
 
 	@Autowired
-	private ZyppOperatorService pmsOperatorService;
+	private PmsOperatorService pmsOperatorService;
 
 	private Cache<String, AtomicInteger> passwordRetryCache;
 
@@ -72,7 +72,7 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
 			passwordRetryCache.remove(username);
 
 			// 根据登录名查询操作员
-			ZyppOperator operator = pmsOperatorService.findOperatorByLoginName(username);
+			PmsOperator operator = pmsOperatorService.findOperatorByLoginName(username);
 			Subject subject = SecurityUtils.getSubject();
 			Session session = subject.getSession();
 			session.setAttribute("PmsOperator", operator);

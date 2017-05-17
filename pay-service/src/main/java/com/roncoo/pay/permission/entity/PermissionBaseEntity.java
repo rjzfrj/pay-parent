@@ -29,7 +29,7 @@ public class PermissionBaseEntity implements Serializable {
 
 	private static final long serialVersionUID = -1164227376672815589L;
 	private Long id;// 主键ID.
-	private Integer version = 0;// 版本号默认为0
+	private Integer ver = 0;// 版本号默认为0
 	private String status;// 状态 PublicStatusEnum
 	private String creater;// 创建人.
 	private Date createTime = new Date();// 创建时间.
@@ -45,12 +45,12 @@ public class PermissionBaseEntity implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getVersion() {
-		return version;
+	public Integer getVer() {
+		return ver;
 	}
 
-	public void setVersion(Integer version) {
-		this.version = version;
+	public void setVer(Integer ver) {
+		this.ver = ver;
 	}
 
 	public String getStatus() {

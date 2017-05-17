@@ -19,7 +19,7 @@ import java.io.Serializable;
 
 /**
  * ：
- * @author zenghao
+ * 
  */
 public class rpObject  extends Object implements Serializable {
 }

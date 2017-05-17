@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
 /**
  * 日期工具类
  * 
- * @author zenghao
+ * 
  */
 public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 

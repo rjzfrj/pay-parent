@@ -37,10 +37,10 @@ import com.roncoo.pay.common.core.dwz.DWZ;
 import com.roncoo.pay.common.core.dwz.DwzAjax;
 import com.roncoo.pay.common.core.utils.StringUtil;
 import com.roncoo.pay.controller.common.BaseController;
-import com.roncoo.pay.permission.entity.ZyppOperator;
+import com.roncoo.pay.permission.entity.PmsOperator;
 import com.roncoo.pay.permission.exception.PermissionException;
-import com.roncoo.pay.permission.service.ZyppMenuService;
-import com.roncoo.pay.permission.service.ZyppOperatorRoleService;
+import com.roncoo.pay.permission.service.PmsMenuService;
+import com.roncoo.pay.permission.service.PmsOperatorRoleService;
 
 /**
  * ：
@@ -53,9 +53,9 @@ public class LoginController extends BaseController {
 	private static final Log LOG = LogFactory.getLog(LoginController.class);
 
 	@Autowired
-	private ZyppOperatorRoleService pmsOperatorRoleService;
+	private PmsOperatorRoleService pmsOperatorRoleService;
 	@Autowired
-	private ZyppMenuService pmsMenuService;
+	private PmsMenuService pmsMenuService;
 
 	/**
 	 * 函数功能说明 ： 进入后台登陆页面.
@@ -93,7 +93,7 @@ public class LoginController extends BaseController {
 	 */
 	@RequestMapping("/")
 	public String index(HttpServletRequest req, Model model) {
-		ZyppOperator pmsOperator = (ZyppOperator) this.getSession().getAttribute("PmsOperator");
+		PmsOperator pmsOperator = (PmsOperator) this.getSession().getAttribute("PmsOperator");
 		try {
 			String tree = this.buildOperatorPermissionMenu(pmsOperator);
 			model.addAttribute("tree", tree);
@@ -151,7 +151,7 @@ public class LoginController extends BaseController {
 	 * @throws PermissionException
 	 * @throws Exception
 	 */
-	private String buildOperatorPermissionMenu(ZyppOperator pmsOperator) throws PermissionException {
+	private String buildOperatorPermissionMenu(PmsOperator pmsOperator) throws PermissionException {
 		// 根据用户ID得到该用户的所有角色拼成的字符串
 		String roleIds = pmsOperatorRoleService.getRoleIdsByOperatorId(pmsOperator.getId());
 		if (StringUtils.isBlank(roleIds)) {
