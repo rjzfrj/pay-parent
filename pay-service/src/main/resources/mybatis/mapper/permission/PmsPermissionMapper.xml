@@ -17,14 +17,26 @@
 		<result column="permission" property="permission" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission" keyProperty="id" useGeneratedKeys="true">
+<!-- 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission" keyProperty="id" useGeneratedKeys="true">
 		insert into
 		<include refid="pms_permission" />
 		(id,ver,status,creater,create_time, editor, edit_time, remark, permission_name,permission)
 		values
 		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{permissionName}, #{permission})
-	</insert>
-
+	</insert> -->
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission" keyProperty="id" useGeneratedKeys="true">
+	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+		SELECT SQC_PMS_PERMISSION.NEXTVAL AS ID FROM DUAL
+	</selectKey>
+    insert into PMS_PERMISSION (ID, VER, CREATER, 
+      CREATE_TIME, EDITOR, EDIT_TIME, 
+      STATUS, REMARK, PERMISSION_NAME, 
+      PERMISSION)
+    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, 
+      #{permission,jdbcType=VARCHAR})
+  	</insert>
 	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsPermission">
 		update
 		<include refid="pms_permission" />

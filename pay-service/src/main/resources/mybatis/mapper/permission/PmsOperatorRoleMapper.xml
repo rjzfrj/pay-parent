@@ -18,14 +18,26 @@
 		<result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole" keyProperty="id" useGeneratedKeys="true">
+	<!-- <insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole" keyProperty="id" useGeneratedKeys="true">
 		insert into
 		<include refid="pms_role_operator" />
 		(id,ver,status,creater,create_time, editor, edit_time, remark,role_id, operator_id)
 		values
 		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{roleId}, #{operatorId})
-	</insert>
-
+	</insert> -->
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole" keyProperty="id" useGeneratedKeys="true">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+			SELECT SQC_PMS_ROLE_OPERATOR.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+	    insert into PMS_ROLE_OPERATOR (ID, VER, CREATER, 
+	      CREATE_TIME, EDITOR, EDIT_TIME, 
+	      STATUS, REMARK, ROLE_ID, 
+	      OPERATOR_ID)
+	    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
+	      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+	      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{roleId,jdbcType=DECIMAL}, 
+	      #{operatorId,jdbcType=DECIMAL})
+	  </insert>
 	<select id="listByRoleId" parameterType="Long" resultMap="beanMap">
 		select * from
 		<include refid="pms_role_operator" />

@@ -24,12 +24,20 @@
 	</resultMap>
 
 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperator" keyProperty="id" useGeneratedKeys="true">
-		insert into
-		<include refid="pms_operator" />
-		(id,ver,status,creater,create_time, editor, edit_time, remark, login_name, login_pwd,real_name,mobile_no,type,salt)
-		values
-		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{loginName},#{loginPwd},#{realName},#{mobileNo},#{type},#{salt})
-	</insert>
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+			SELECT SQC_PMS_OPERATOR.NEXTVAL AS ID FROM DUAL
+		 </selectKey>
+    insert into PMS_OPERATOR (ID, VER, CREATER, 
+      CREATE_TIME, EDITOR, EDIT_TIME, 
+      STATUS, REMARK, REAL_NAME, 
+      MOBILE_NO, LOGIN_NAME, LOGIN_PWD, 
+      TYPE, SALT)
+    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
+      #{mobileNo,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
+  </insert>
 
 	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsOperator">
 		update

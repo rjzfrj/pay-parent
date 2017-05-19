@@ -18,15 +18,28 @@
 		<result column="permission_id" property="permissionId" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsRolePermission" keyProperty="id" useGeneratedKeys="true">
+<!-- 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsRolePermission" keyProperty="id" useGeneratedKeys="true">
 		insert into
 		<include refid="pms_role_permission" />
 		(id,ver,status,creater,create_time, editor, edit_time, remark,role_id,permission_id)
 		values
 		(#{id},0,#{status},#{creater}, #{createTime}, #{editor},#{editTime},#{remark},#{roleId}, #{permissionId})
 
-	</insert>
+	</insert> -->
 
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsRolePermission" keyProperty="id" useGeneratedKeys="true">
+	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+		select SQC_PMS_ROLE_PERMISSION.NEXTVAL AS ID FROM DUAL
+	</selectKey>
+    insert into PMS_ROLE_PERMISSION (ID, VER, CREATER, 
+      CREATE_TIME, EDITOR, EDIT_TIME, 
+      STATUS, REMARK, ROLE_ID, 
+      PERMISSION_ID)
+    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{roleId,jdbcType=DECIMAL}, 
+      #{permissionId,jdbcType=DECIMAL})
+  </insert>
 	<sql id="condition_sql">
 		<!-- Equal query -->
 		<if test="roleId != null"> and role_id = #{roleId}</if>

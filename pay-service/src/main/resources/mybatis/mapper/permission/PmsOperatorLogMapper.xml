@@ -21,14 +21,29 @@
 		<result column="content" property="content" />
 	</resultMap>
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog" keyProperty="id" useGeneratedKeys="true">
+<!-- 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog" keyProperty="id" useGeneratedKeys="true">
 		insert into
 		<include refid="pms_operator_log" />
 		(id,ver,status,creater,create_time, editor, edit_time, remark, operator_id, operator_name,operate_type,ip,content)
 		values
 		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{operatorId},#{operatorName},#{operateType},#{ip}, #{content})
-	</insert>
+	</insert> -->
 
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog" keyProperty="id" useGeneratedKeys="true">
+	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+		SELECT SQC_PMS_OPERATOR_LOG.NEXTVAL AS ID FROM DUAL
+	</selectKey>
+    insert into PMS_OPERATOR_LOG (ID, VER, CREATER, 
+      CREATE_TIME, EDITOR, EDIT_TIME, 
+      STATUS, REMARK, OPERATOR_ID, 
+      OPERATOR_NAME, OPERATE_TYPE, IP, 
+      CONTENT)
+    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{operatorId,jdbcType=DECIMAL}, 
+      #{operatorName,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
+      #{content,jdbcType=VARCHAR})
+  </insert>
 	<select id="selectByPrimaryKey" parameterType="Long" resultType="com.roncoo.pay.permission.entity.PmsOperatorLog">
 		select * from
 		<include refid="pms_operator_log" />

@@ -7,22 +7,20 @@
 	<sql id="pms_role_menu"> PMS_MENU_ROLE </sql>
 
 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsMenu" keyProperty="id" useGeneratedKeys="true">
-		insert into
-		<include refid="pms_menu" />
-		(id,ver,status,creater,create_time, editor, edit_time, remark,
-		name,url,parent_id,num,is_leaf,lvl,target_name
-		) values
-		( #{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},
-		#{name,jdbcType=VARCHAR},
-		#{url,jdbcType=VARCHAR},
-		#{parent.id,jdbcType=VARCHAR},
-		#{num,jdbcType=VARCHAR},
-		#{isLeaf,jdbcType=VARCHAR},
-		#{lvl,jdbcType=INTEGER},
-		#{targetName,jdbcType=VARCHAR}
-		)
-	</insert>
-
+	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long" >
+		SELECT SQC_PMS_MENU.NEXTVAL AS ID FROM DUAL
+	</selectKey>
+    insert into PMS_MENU (ID, VER, CREATER, 
+      CREATE_TIME, EDITOR, EDIT_TIME, 
+      STATUS, REMARK, IS_LEAF, 
+      LVL, PARENT_ID, TARGET_NAME, 
+      NUM, NAME, URL)
+    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{isLeaf,jdbcType=VARCHAR}, 
+      #{lvl,jdbcType=DECIMAL}, #{parentId,jdbcType=DECIMAL}, #{targetName,jdbcType=VARCHAR}, 
+      #{num,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
+  </insert>
 	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsMenu">
 		update
 		<include refid="pms_menu" />
