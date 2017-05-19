@@ -6,56 +6,123 @@
 	<sql id="pms_role"> PMS_ROLE </sql>
 	<sql id="pms_role_menu"> PMS_MENU_ROLE </sql>
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsMenu" keyProperty="id" useGeneratedKeys="true">
-	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long" >
-		SELECT SQC_PMS_MENU.NEXTVAL AS ID FROM DUAL
-	</selectKey>
-    insert into PMS_MENU (ID, VER, CREATER, 
-      CREATE_TIME, EDITOR, EDIT_TIME, 
-      STATUS, REMARK, IS_LEAF, 
-      LVL, PARENT_ID, TARGET_NAME, 
-      NUM, NAME, URL)
-    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{isLeaf,jdbcType=VARCHAR}, 
-      #{lvl,jdbcType=DECIMAL}, #{parentId,jdbcType=DECIMAL}, #{targetName,jdbcType=VARCHAR}, 
-      #{num,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR})
-  </insert>
-	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsMenu">
-		update
-		<include refid="pms_menu" />
-		<set>
-			ver = #{ver}+1,
-			name = #{name,jdbcType=VARCHAR},
-			url = #{url,jdbcType=VARCHAR},
-			parent_id = #{parent.id,jdbcType=INTEGER},
-			num = #{num,jdbcType=VARCHAR},
-			is_leaf = #{isLeaf,jdbcType=VARCHAR},
-			lvl =#{lvl,jdbcType=INTEGER},
-			target_name = #{targetName,jdbcType=VARCHAR}
-		</set>
-		where ID = #{id} and ver = #{ver}
-	</update>
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsMenu"
+		keyProperty="id" useGeneratedKeys="true">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+			SELECT SQC_PMS_MENU.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into PMS_MENU (ID, VER, CREATER,
+		CREATE_TIME, EDITOR, EDIT_TIME,
+		STATUS, REMARK, IS_LEAF,
+		LVL, PARENT_ID, TARGET_NAME,
+		NUM, NAME, URL)
+		values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL},
+		#{creater,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{isLeaf,jdbcType=VARCHAR},
+		#{lvl,jdbcType=DECIMAL},
+		#{parentId,jdbcType=DECIMAL}, #{targetName,jdbcType=VARCHAR},
+		#{num,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR},
+		#{url,jdbcType=VARCHAR})
+	</insert>
+	<!-- <update id="update" parameterType="com.roncoo.pay.permission.entity.PmsMenu"> 
+		update <include refid="pms_menu" /> <set> ver = #{ver}+1, name = #{name,jdbcType=VARCHAR}, 
+		url = #{url,jdbcType=VARCHAR}, parent_id = #{parent.id,jdbcType=INTEGER}, 
+		num = #{num,jdbcType=VARCHAR}, is_leaf = #{isLeaf,jdbcType=VARCHAR}, lvl 
+		=#{lvl,jdbcType=INTEGER}, target_name = #{targetName,jdbcType=VARCHAR} </set> 
+		where ID = #{id} and ver = #{ver} </update> -->
 
 	<delete id="deleteByPrimaryKey" parameterType="long">
 		delete from
 		<include refid="pms_menu" />
 		where ID = #{id}
 	</delete>
-
-	<select id="selectByPrimaryKey" parameterType="Long" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsMenu">
+		update PMS_MENU
+		<set>
+			<if test="ver != null">
+				VER = #{ver,jdbcType=DECIMAL},
+			</if>
+			<if test="creater != null">
+				CREATER = #{creater,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				EDITOR = #{editor,jdbcType=VARCHAR},
+			</if>
+			<if test="editTime != null">
+				EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="isLeaf != null">
+				IS_LEAF = #{isLeaf,jdbcType=VARCHAR},
+			</if>
+			<if test="lvl != null">
+				LVL = #{lvl,jdbcType=DECIMAL},
+			</if>
+			<if test="parentId != null">
+				PARENT_ID = #{parentId,jdbcType=DECIMAL},
+			</if>
+			<if test="targetName != null">
+				TARGET_NAME = #{targetName,jdbcType=VARCHAR},
+			</if>
+			<if test="num != null">
+				NUM = #{num,jdbcType=VARCHAR},
+			</if>
+			<if test="name != null">
+				NAME = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="url != null">
+				URL = #{url,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsMenu">
+		update PMS_MENU
+		set VER = #{ver,jdbcType=DECIMAL}+1,
+		CREATER = #{creater,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		EDITOR = #{editor,jdbcType=VARCHAR},
+		EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		IS_LEAF = #{isLeaf,jdbcType=VARCHAR},
+		LVL = #{lvl,jdbcType=DECIMAL},
+		PARENT_ID = #{parentId,jdbcType=DECIMAL},
+		TARGET_NAME = #{targetName,jdbcType=VARCHAR},
+		NUM = #{num,jdbcType=VARCHAR},
+		NAME = #{name,jdbcType=VARCHAR},
+		URL = #{url,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL} and VER = #{ver,jdbcType=DECIMAL}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="Long"
+		resultType="com.roncoo.pay.permission.entity.PmsMenu">
 		select
 		d.id,d.ver,d.status,d.creater,
-		d.create_time as "createTime", d.editor,
+		d.create_time as "createTime",
+		d.editor,
 		d.edit_time as "editTime", d.remark,
 		d.name as "name",
-		d.url as "url",
+		d.url as
+		"url",
 		d.parent_id as "parent.id",
 		parent.name as "parent.name",
-		d.num as "num",
+		d.num as
+		"num",
 		d.is_leaf as "isLeaf",
 		d.lvl as "lvl",
-		d.target_name as "targetName"
+		d.target_name as
+		"targetName"
 		from
 		<include refid="pms_menu" />
 		d
@@ -66,13 +133,16 @@
 		where d.id = #{id}
 	</select>
 
-	<select id="listPage" parameterType="java.util.Map" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+	<select id="listPage" parameterType="java.util.Map"
+		resultType="com.roncoo.pay.permission.entity.PmsMenu">
 		select
 		d.id,d.ver,d.status,d.creater,
-		d.create_time as "createTime", d.editor,
+		d.create_time as "createTime",
+		d.editor,
 		d.edit_time as "editTime", d.remark,
 		d.name as "name",
-		d.url as "url",
+		d.url as
+		"url",
 		d.parent_id as "parent.id",
 		d.num as "num",
 		d.is_leaf as "isLeaf"，
@@ -84,7 +154,8 @@
 
 	</select>
 
-	<select id="listPageCount" parameterType="java.util.Map" resultType="long">
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
 		select count(1) from
 		<include refid="pms_menu" />
 		D
@@ -96,7 +167,8 @@
 		<if test="parentId != null and parentId != ''"> and parent_id = #{parentId}</if>
 	</sql>
 
-	<select id="listBy" parameterType="java.util.Map" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+	<select id="listBy" parameterType="java.util.Map"
+		resultType="com.roncoo.pay.permission.entity.PmsMenu">
 		select * from
 		<include refid="pms_menu" />
 		<where>
@@ -104,21 +176,21 @@
 		</where>
 	</select>
 
-	  <resultMap id="BaseResultMap" type="java.util.HashMap">
-		    <id column="ID" jdbcType="VARCHAR" property="id" />
-		    <result column="VER" jdbcType="DECIMAL" property="ver" />
-		    <result column="STATUS" jdbcType="VARCHAR" property="status" />
-		    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
-		    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
-		    <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
-		    <result column="EDIT_TIME" jdbcType="TIMESTAMP" property="editTime" />
-		    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
-		    <result column="PARENT_ID" jdbcType="DECIMAL" property="pId" />
-		    <result column="NAME" jdbcType="VARCHAR" property="name" />
-		    <result column="IS_LEAF" jdbcType="VARCHAR" property="isLeaf" />
-		    <result column="LVL" jdbcType="DECIMAL" property="lvl" />
-		    <result column="TARGET_NAME" jdbcType="VARCHAR" property="targetName" />
-    </resultMap>
+	<resultMap id="BaseResultMap" type="java.util.HashMap">
+		<id column="ID" jdbcType="VARCHAR" property="id" />
+		<result column="VER" jdbcType="DECIMAL" property="ver" />
+		<result column="STATUS" jdbcType="VARCHAR" property="status" />
+		<result column="CREATER" jdbcType="VARCHAR" property="creater" />
+		<result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		<result column="EDITOR" jdbcType="VARCHAR" property="editor" />
+		<result column="EDIT_TIME" jdbcType="TIMESTAMP" property="editTime" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="PARENT_ID" jdbcType="DECIMAL" property="pId" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="IS_LEAF" jdbcType="VARCHAR" property="isLeaf" />
+		<result column="LVL" jdbcType="DECIMAL" property="lvl" />
+		<result column="TARGET_NAME" jdbcType="VARCHAR" property="targetName" />
+	</resultMap>
 
 	<select id="listByParent" parameterType="Long" resultMap="BaseResultMap">
 		select
@@ -128,7 +200,7 @@
 		m.creater,
 		m.create_time ,
 		m.editor,
-		m.edit_time, 
+		m.edit_time,
 		m.remark,
 		m.parent_id,
 		m.name ,
@@ -145,32 +217,20 @@
 		</where>
 		order by m.num asc
 	</select>
-<!-- 	<select id="listByParent" parameterType="Long" resultType="java.util.Map">
-		select
-		m.id,m.ver,m.status,m.creater,
-		m.create_time as "createTime", m.editor,
-		m.edit_time as "editTime", m.remark,
-		m.parent_id as "pId",
-		m.name as "name",
-		m.is_leaf as "isLeaf",
-		m.lvl as "lvl",
-		m.target_name as "targetName"
-		from
-		<include refid="pms_menu" />
-		m
-		<where>
-			<if test="parentid!=null and parentid!=''">
-				and m.parent_id = #{parentId}
-			</if>
-		</where>
-		order by m.num asc
-	</select> -->
-	<select id="listByParentId" parameterType="long" resultType="com.roncoo.pay.permission.entity.PmsMenu">
+	<!-- <select id="listByParent" parameterType="Long" resultType="java.util.Map"> 
+		select m.id,m.ver,m.status,m.creater, m.create_time as "createTime", m.editor, 
+		m.edit_time as "editTime", m.remark, m.parent_id as "pId", m.name as "name", 
+		m.is_leaf as "isLeaf", m.lvl as "lvl", m.target_name as "targetName" from 
+		<include refid="pms_menu" /> m <where> <if test="parentid!=null and parentid!=''"> 
+		and m.parent_id = #{parentId} </if> </where> order by m.num asc </select> -->
+	<select id="listByParentId" parameterType="long"
+		resultType="com.roncoo.pay.permission.entity.PmsMenu">
 		select
 		id as "id" ,
 		ver as "ver",
 		parent_id as "parent.id",
-		name as "name",
+		name as
+		"name",
 		is_leaf as "isLeaf",
 		lvl as "lvl",
 		target_name as"targetName"
@@ -184,11 +244,13 @@
 		select
 		m.id as "id",
 		m.ver as "ver",
-		m.parent_id as "pId",
+		m.parent_id
+		as "pId",
 		m.name as "name",
 		m.is_leaf as "isLeaf",
 		m.lvl as "lvl",
-		m.url as "url",
+		m.url
+		as "url",
 		m.target_name as "targetName",
 		m.num as num
 		from
@@ -203,8 +265,9 @@
 		m
 		on rm.menu_id = m.id
 		where r.id in
-		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
-		)  mt order by mt.num asc
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">#{item}</foreach>
+		) mt order by mt.num asc
 	</select>
 
 </mapper>

@@ -5,7 +5,8 @@
 	<!-- Pms权限管理：角色与操作员关联表 -->
 	<sql id="pms_role_operator"> PMS_ROLE_OPERATOR </sql>
 
-	<resultMap id="beanMap" type="com.roncoo.pay.permission.entity.PmsOperatorRole">
+	<resultMap id="beanMap"
+		type="com.roncoo.pay.permission.entity.PmsOperatorRole">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="ver" property="ver" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
@@ -18,26 +19,27 @@
 		<result column="operator_id" property="operatorId" jdbcType="VARCHAR" />
 	</resultMap>
 
-	<!-- <insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole" keyProperty="id" useGeneratedKeys="true">
-		insert into
-		<include refid="pms_role_operator" />
-		(id,ver,status,creater,create_time, editor, edit_time, remark,role_id, operator_id)
-		values
-		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{roleId}, #{operatorId})
-	</insert> -->
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole" keyProperty="id" useGeneratedKeys="true">
+	<!-- <insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole" 
+		keyProperty="id" useGeneratedKeys="true"> insert into <include refid="pms_role_operator" 
+		/> (id,ver,status,creater,create_time, editor, edit_time, remark,role_id, 
+		operator_id) values (#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{roleId}, 
+		#{operatorId}) </insert> -->
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole"
+		keyProperty="id" useGeneratedKeys="true">
 		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
 			SELECT SQC_PMS_ROLE_OPERATOR.NEXTVAL AS ID FROM DUAL
 		</selectKey>
-	    insert into PMS_ROLE_OPERATOR (ID, VER, CREATER, 
-	      CREATE_TIME, EDITOR, EDIT_TIME, 
-	      STATUS, REMARK, ROLE_ID, 
-	      OPERATOR_ID)
-	    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
-	      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
-	      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{roleId,jdbcType=DECIMAL}, 
-	      #{operatorId,jdbcType=DECIMAL})
-	  </insert>
+		insert into PMS_ROLE_OPERATOR (ID, VER, CREATER,
+		CREATE_TIME, EDITOR, EDIT_TIME,
+		STATUS, REMARK, ROLE_ID,
+		OPERATOR_ID)
+		values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL},
+		#{creater,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{roleId,jdbcType=DECIMAL},
+		#{operatorId,jdbcType=DECIMAL})
+	</insert>
 	<select id="listByRoleId" parameterType="Long" resultMap="beanMap">
 		select * from
 		<include refid="pms_role_operator" />
@@ -67,5 +69,51 @@
 		<include refid="pms_role_operator" />
 		where role_id = #{roleId} and operator_id = #{operatorId}
 	</delete>
+ <update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole">
+    update PMS_ROLE_OPERATOR
+    <set>
+      <if test="ver != null">
+        VER = #{ver,jdbcType=DECIMAL},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editor != null">
+        EDITOR = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      </if>
+      <if test="operatorId != null">
+        OPERATOR_ID = #{operatorId,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsOperatorRole">
+    update PMS_ROLE_OPERATOR
+    set VER = #{ver,jdbcType=DECIMAL},
+      CREATER = #{creater,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      EDITOR = #{editor,jdbcType=VARCHAR},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ROLE_ID = #{roleId,jdbcType=DECIMAL},
+      OPERATOR_ID = #{operatorId,jdbcType=DECIMAL}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
 
 </mapper>

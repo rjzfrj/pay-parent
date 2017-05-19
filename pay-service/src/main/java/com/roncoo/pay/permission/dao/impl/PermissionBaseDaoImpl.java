@@ -32,7 +32,7 @@ public abstract class PermissionBaseDaoImpl<T extends PermissionBaseEntity> exte
 
 	public static final String SQL_INSERT = "insert";
 	public static final String SQL_BATCH_INSERT = "batchInsert";
-	public static final String SQL_UPDATE_BY_ID = "update";
+	public static final String SQL_UPDATE_BY_ID = "updateByPrimaryKey";
 	public static final String SQL_BATCH_UPDATE_BY_IDS = "batchUpdateByIds";
 	public static final String SQL_BATCH_UPDATE_BY_COLUMN = "batchUpdateByColumn";
 	public static final String SQL_SELECT_BY_ID = "selectByPrimaryKey";

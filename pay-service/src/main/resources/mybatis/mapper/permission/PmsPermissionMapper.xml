@@ -4,7 +4,8 @@
 
 	<sql id="pms_permission"> PMS_PERMISSION </sql>
 
-	<resultMap id="beanMap" type="com.roncoo.pay.permission.entity.PmsPermission">
+	<resultMap id="beanMap"
+		type="com.roncoo.pay.permission.entity.PmsPermission">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="ver" property="ver" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
@@ -13,61 +14,102 @@
 		<result column="editor" property="editor" jdbcType="VARCHAR" />
 		<result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
 		<result column="remark" property="remark" jdbcType="VARCHAR" />
-		<result column="permission_name" property="permissionName" jdbcType="VARCHAR" />
+		<result column="permission_name" property="permissionName"
+			jdbcType="VARCHAR" />
 		<result column="permission" property="permission" jdbcType="VARCHAR" />
 	</resultMap>
 
-<!-- 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission" keyProperty="id" useGeneratedKeys="true">
-		insert into
-		<include refid="pms_permission" />
-		(id,ver,status,creater,create_time, editor, edit_time, remark, permission_name,permission)
-		values
-		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{permissionName}, #{permission})
-	</insert> -->
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission" keyProperty="id" useGeneratedKeys="true">
-	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-		SELECT SQC_PMS_PERMISSION.NEXTVAL AS ID FROM DUAL
-	</selectKey>
-    insert into PMS_PERMISSION (ID, VER, CREATER, 
-      CREATE_TIME, EDITOR, EDIT_TIME, 
-      STATUS, REMARK, PERMISSION_NAME, 
-      PERMISSION)
-    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{permissionName,jdbcType=VARCHAR}, 
-      #{permission,jdbcType=VARCHAR})
-  	</insert>
-	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsPermission">
-		update
-		<include refid="pms_permission" />
+	<!-- <insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission" 
+		keyProperty="id" useGeneratedKeys="true"> insert into <include refid="pms_permission" 
+		/> (id,ver,status,creater,create_time, editor, edit_time, remark, permission_name,permission) 
+		values (#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{permissionName}, 
+		#{permission}) </insert> -->
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsPermission"
+		keyProperty="id" useGeneratedKeys="true">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+			SELECT SQC_PMS_PERMISSION.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into PMS_PERMISSION (ID, VER, CREATER,
+		CREATE_TIME, EDITOR, EDIT_TIME,
+		STATUS, REMARK, PERMISSION_NAME,
+		PERMISSION)
+		values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL},
+		#{creater,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{permissionName,jdbcType=VARCHAR},
+		#{permission,jdbcType=VARCHAR})
+	</insert>
+	<!-- <update id="update" parameterType="com.roncoo.pay.permission.entity.PmsPermission"> 
+		update <include refid="pms_permission" /> <set> ver = #{ver}+1, creater = 
+		#{creater,jdbcType=VARCHAR}, create_time = #{createTime,jdbcType=TIMESTAMP}, 
+		editor = #{editor,jdbcType=VARCHAR}, edit_time = #{editTime,jdbcType=TIMESTAMP}, 
+		remark = #{remark,jdbcType=VARCHAR}, permission_name = #{permissionName,jdbcType=VARCHAR}, 
+		permission = #{permission,jdbcType=VARCHAR} </set> <where> id = #{id} and 
+		ver = #{ver} </where> </update> -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsPermission">
+		update PMS_PERMISSION
 		<set>
-
-			ver = #{ver}+1,
-			creater = #{creater,jdbcType=VARCHAR},
-			create_time = #{createTime,jdbcType=TIMESTAMP},
-			editor = #{editor,jdbcType=VARCHAR},
-			edit_time = #{editTime,jdbcType=TIMESTAMP},
-			remark = #{remark,jdbcType=VARCHAR},
-			permission_name = #{permissionName,jdbcType=VARCHAR},
-			permission = #{permission,jdbcType=VARCHAR}
+			<if test="ver != null">
+				VER = #{ver,jdbcType=DECIMAL},
+			</if>
+			<if test="creater != null">
+				CREATER = #{creater,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				EDITOR = #{editor,jdbcType=VARCHAR},
+			</if>
+			<if test="editTime != null">
+				EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="permissionName != null">
+				PERMISSION_NAME = #{permissionName,jdbcType=VARCHAR},
+			</if>
+			<if test="permission != null">
+				PERMISSION = #{permission,jdbcType=VARCHAR},
+			</if>
 		</set>
-		<where>
-			id = #{id} and ver = #{ver}
-		</where>
+		where ID = #{id,jdbcType=DECIMAL} 
 	</update>
-
+	<update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsPermission">
+		update PMS_PERMISSION
+		set VER = #{ver,jdbcType=DECIMAL}+1,
+		CREATER = #{creater,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		EDITOR = #{editor,jdbcType=VARCHAR},
+		EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		PERMISSION_NAME = #{permissionName,jdbcType=VARCHAR},
+		PERMISSION = #{permission,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL} and 
+		ver = #{ver,jdbcType=DECIMAL}
+	</update>
 	<select id="findByIds" resultMap="beanMap">
 		select
-		id,ver,status,create_time, editor, edit_time, remark, permission_name,permission
+		id,ver,status,create_time, editor, edit_time, remark,
+		permission_name,permission
 		from
 		<include refid="pms_permission" />
 		where ID in
-		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
+		<foreach item="item" index="index" collection="list" open="("
+			separator="," close=")">#{item}</foreach>
 	</select>
 
-	<select id="getByPermissionName" parameterType="string" resultMap="beanMap">
+	<select id="getByPermissionName" parameterType="string"
+		resultMap="beanMap">
 		select
-		id,ver,status,create_time, editor, edit_time, remark, permission_name,permission
+		id,ver,status,create_time, editor, edit_time, remark,
+		permission_name,permission
 		from
 		<include refid="pms_permission" />
 		where permission_name = #{permissionName}
@@ -75,28 +117,33 @@
 
 	<select id="getByPermission" parameterType="string" resultMap="beanMap">
 		select
-		id,ver,status,create_time, editor, edit_time, remark, permission_name,permission
+		id,ver,status,create_time, editor, edit_time, remark,
+		permission_name,permission
 		from
 		<include refid="pms_permission" />
 		where permission = #{permission}
 	</select>
 
-	<select id="getByPermissionNameNotEqId" parameterType="java.util.Map" resultMap="beanMap">
+	<select id="getByPermissionNameNotEqId" parameterType="java.util.Map"
+		resultMap="beanMap">
 		select
-		id,ver,status,create_time, editor, edit_time, remark, permission_name,permission
+		id,ver,status,create_time, editor, edit_time, remark,
+		permission_name,permission
 		from
 		<include refid="pms_permission" />
 		where permission_name = #{permissionName} and id != #{id}
 	</select>
 
-	<select id="getByPermissionNotEqId" parameterType="java.util.Map" resultMap="beanMap">
+	<select id="getByPermissionNotEqId" parameterType="java.util.Map"
+		resultMap="beanMap">
 		select
-		id,ver,status,create_time, editor, edit_time, remark, permission_name,permission
+		id,ver,status,create_time, editor, edit_time, remark,
+		permission_name,permission
 		from
 		<include refid="pms_permission" />
 		where permission = #{permission} and id != #{id}
 	</select>
-	
+
 	<select id="selectByPrimaryKey" parameterType="Long" resultMap="beanMap">
 		select
 		*
@@ -117,7 +164,8 @@
 		<!-- Equal query -->
 		<if test="permission != null and permission != ''"> and permission= #{permission}</if>
 		<!-- Like query -->
-		<if test="permissionName != null and permissionName != ''"> and permission_Name like CONCAT(CONCAT('%', #{permissionName}), '%')</if>
+		<if test="permissionName != null and permissionName != ''"> and permission_Name like CONCAT(CONCAT('%',
+			#{permissionName}), '%')</if>
 	</sql>
 
 	<!-- 分页查询 -->
@@ -127,11 +175,12 @@
 		<where>
 			<include refid="condition_sql" />
 		</where>
-		order by create_time desc 
+		order by create_time desc
 	</select>
 
 	<!-- 分页查询时要用到的总数统计 -->
-	<select id="listPageCount" parameterType="java.util.Map" resultType="long">
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
 		select count(*) from
 		<include refid="pms_permission" />
 		<where>

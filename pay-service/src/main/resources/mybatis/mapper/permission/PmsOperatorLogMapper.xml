@@ -5,7 +5,8 @@
 	<!-- Pms权限管理：操作员操作日志表 -->
 	<sql id="pms_operator_log"> PMS_OPERATOR_LOG </sql>
 
-	<resultMap id="beanMap" type="com.roncoo.pay.permission.entity.PmsOperatorLog">
+	<resultMap id="beanMap"
+		type="com.roncoo.pay.permission.entity.PmsOperatorLog">
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="ver" property="ver" jdbcType="INTEGER" />
 		<result column="status" property="status" jdbcType="VARCHAR" />
@@ -21,30 +22,96 @@
 		<result column="content" property="content" />
 	</resultMap>
 
-<!-- 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog" keyProperty="id" useGeneratedKeys="true">
-		insert into
-		<include refid="pms_operator_log" />
-		(id,ver,status,creater,create_time, editor, edit_time, remark, operator_id, operator_name,operate_type,ip,content)
-		values
-		(#{id},0,#{status}, #{creater},#{createTime}, #{editor},#{editTime},#{remark},#{operatorId},#{operatorName},#{operateType},#{ip}, #{content})
-	</insert> -->
+	<!-- <insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog" 
+		keyProperty="id" useGeneratedKeys="true"> insert into <include refid="pms_operator_log" 
+		/> (id,ver,status,creater,create_time, editor, edit_time, remark, operator_id, 
+		operator_name,operate_type,ip,content) values (#{id},0,#{status}, #{creater},#{createTime}, 
+		#{editor},#{editTime},#{remark},#{operatorId},#{operatorName},#{operateType},#{ip}, 
+		#{content}) </insert> -->
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog" keyProperty="id" useGeneratedKeys="true">
-	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
-		SELECT SQC_PMS_OPERATOR_LOG.NEXTVAL AS ID FROM DUAL
-	</selectKey>
-    insert into PMS_OPERATOR_LOG (ID, VER, CREATER, 
-      CREATE_TIME, EDITOR, EDIT_TIME, 
-      STATUS, REMARK, OPERATOR_ID, 
-      OPERATOR_NAME, OPERATE_TYPE, IP, 
-      CONTENT)
-    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{operatorId,jdbcType=DECIMAL}, 
-      #{operatorName,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR}, 
-      #{content,jdbcType=VARCHAR})
-  </insert>
-	<select id="selectByPrimaryKey" parameterType="Long" resultType="com.roncoo.pay.permission.entity.PmsOperatorLog">
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog"
+		keyProperty="id" useGeneratedKeys="true">
+		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
+			SELECT SQC_PMS_OPERATOR_LOG.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into PMS_OPERATOR_LOG (ID, VER, CREATER,
+		CREATE_TIME, EDITOR, EDIT_TIME,
+		STATUS, REMARK, OPERATOR_ID,
+		OPERATOR_NAME, OPERATE_TYPE, IP,
+		CONTENT)
+		values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL},
+		#{creater,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{operatorId,jdbcType=DECIMAL},
+		#{operatorName,jdbcType=VARCHAR}, #{operateType,jdbcType=VARCHAR}, #{ip,jdbcType=VARCHAR},
+		#{content,jdbcType=VARCHAR})
+	</insert>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from PMS_OPERATOR_LOG
+		where ID = #{id,jdbcType=DECIMAL}
+	</delete>
+	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog">
+		update PMS_OPERATOR_LOG
+		<set>
+			<if test="ver != null">
+				VER = #{ver,jdbcType=DECIMAL},
+			</if>
+			<if test="creater != null">
+				CREATER = #{creater,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				EDITOR = #{editor,jdbcType=VARCHAR},
+			</if>
+			<if test="editTime != null">
+				EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="operatorId != null">
+				OPERATOR_ID = #{operatorId,jdbcType=DECIMAL},
+			</if>
+			<if test="operatorName != null">
+				OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+			</if>
+			<if test="operateType != null">
+				OPERATE_TYPE = #{operateType,jdbcType=VARCHAR},
+			</if>
+			<if test="ip != null">
+				IP = #{ip,jdbcType=VARCHAR},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsOperatorLog">
+		update PMS_OPERATOR_LOG
+		set VER = #{ver,jdbcType=DECIMAL},
+		CREATER = #{creater,jdbcType=VARCHAR},
+		CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+		EDITOR = #{editor,jdbcType=VARCHAR},
+		EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+		STATUS = #{status,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		OPERATOR_ID = #{operatorId,jdbcType=DECIMAL},
+		OPERATOR_NAME = #{operatorName,jdbcType=VARCHAR},
+		OPERATE_TYPE = #{operateType,jdbcType=VARCHAR},
+		IP = #{ip,jdbcType=VARCHAR},
+		CONTENT = #{content,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+
+	<select id="selectByPrimaryKey" parameterType="Long"
+		resultType="com.roncoo.pay.permission.entity.PmsOperatorLog">
 		select * from
 		<include refid="pms_operator_log" />
 		where id = #{id}
@@ -56,7 +123,8 @@
 		<if test="operateType != null and operateType != ''"> and operate_type = #{operateType}</if>
 		<if test="status != null and status != ''"> and status = #{status}</if>
 		<if test="ip != null and ip != ''"> and ip = #{ip}</if>
-		<if test="beginDate != null and beginDate != '' and endDate != null and endDate != ''">
+		<if
+			test="beginDate != null and beginDate != '' and endDate != null and endDate != ''">
 			and create_time between #{beginDate} and CONCAT(#{endDate}, '
 			23:59:59')
 		</if>
@@ -71,7 +139,8 @@
 		<![CDATA[ order by ID desc]]>
 	</select>
 
-	<select id="listPageCount" parameterType="java.util.Map" resultType="long">
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
 		select count(1) from
 		<include refid="pms_operator_log" />
 		<where>

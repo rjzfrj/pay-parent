@@ -41,7 +41,7 @@
       #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, 
       #{roleName,jdbcType=VARCHAR})
   	</insert>
-	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsRole">
+<!-- 	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsRole">
 		update
 		<include refid="pms_role" />
 		<set>
@@ -59,8 +59,53 @@
 		<where>
 			id = #{id} and ver = #{ver}
 		</where>
-	</update>
-
+	</update> -->
+	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsRole">
+    update PMS_ROLE
+    <set>
+      <if test="ver != null">
+        VER = #{ver,jdbcType=DECIMAL},
+      </if>
+      <if test="creater != null">
+        CREATER = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="editor != null">
+        EDITOR = #{editor,jdbcType=VARCHAR},
+      </if>
+      <if test="editTime != null">
+        EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        STATUS = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleCode != null">
+        ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null">
+        ROLE_NAME = #{roleName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL} 
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsRole">
+    update PMS_ROLE
+    set VER = #{ver,jdbcType=DECIMAL}+1,
+      CREATER = #{creater,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      EDITOR = #{editor,jdbcType=VARCHAR},
+      EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+      STATUS = #{status,jdbcType=VARCHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      ROLE_CODE = #{roleCode,jdbcType=VARCHAR},
+      ROLE_NAME = #{roleName,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL} and #{ver,jdbcType=DECIMAL}
+  </update>
 	<select id="selectByPrimaryKey" parameterType="Long" resultMap="beanMap">
 		select * from
 		<include refid="pms_role" />

@@ -6,75 +6,128 @@
 	<sql id="pms_operator"> PMS_OPERATOR </sql>
 	<sql id="pms_role_operator"> PMS_ROLE_OPERATOR </sql>
 
-	<resultMap id="beanMap" type="com.roncoo.pay.permission.entity.PmsOperator">
-		<id column="id" property="id" jdbcType="INTEGER" />
-		<result column="ver" property="ver" jdbcType="INTEGER" />
-		<result column="status" property="status" jdbcType="VARCHAR" />
-		<result column="creater" property="creater" jdbcType="VARCHAR" />
-		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-		<result column="editor" property="editor" jdbcType="VARCHAR" />
-		<result column="edit_time" property="editTime" jdbcType="TIMESTAMP" />
-		<result column="remark" property="remark" jdbcType="VARCHAR" />
-		<result column="login_name" property="loginName" jdbcType="VARCHAR" />
-		<result column="login_pwd" property="loginPwd" jdbcType="VARCHAR" />
-		<result column="real_name" property="realName" jdbcType="VARCHAR" />
-		<result column="mobile_no" property="mobileNo" jdbcType="VARCHAR"  />
-		<result column="type" property="type" jdbcType="VARCHAR"  />
-		<result column="salt" property="salt" jdbcType="VARCHAR"  />
+	<resultMap id="BaseResultMap" type="com.roncoo.pay.permission.entity.PmsOperator">
+		<id column="ID" property="id" jdbcType="DECIMAL" />
+		<result column="VER" property="ver" jdbcType="DECIMAL" />
+		<result column="CREATER" property="creater" jdbcType="VARCHAR" />
+		<result column="CREATE_TIME" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="EDITOR" property="editor" jdbcType="VARCHAR" />
+		<result column="EDIT_TIME" property="editTime" jdbcType="TIMESTAMP" />
+		<result column="STATUS" property="status" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="REAL_NAME" property="realName" jdbcType="VARCHAR" />
+		<result column="MOBILE_NO" property="mobileNo" jdbcType="VARCHAR" />
+		<result column="LOGIN_NAME" property="loginName" jdbcType="VARCHAR" />
+		<result column="LOGIN_PWD" property="loginPwd" jdbcType="VARCHAR" />
+		<result column="TYPE" property="type" jdbcType="VARCHAR" />
+		<result column="SALT" property="salt" jdbcType="VARCHAR" />
 	</resultMap>
-
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperator" keyProperty="id" useGeneratedKeys="true">
+	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperator"
+		keyProperty="id" useGeneratedKeys="true">
 		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
 			SELECT SQC_PMS_OPERATOR.NEXTVAL AS ID FROM DUAL
-		 </selectKey>
-    insert into PMS_OPERATOR (ID, VER, CREATER, 
-      CREATE_TIME, EDITOR, EDIT_TIME, 
-      STATUS, REMARK, REAL_NAME, 
-      MOBILE_NO, LOGIN_NAME, LOGIN_PWD, 
-      TYPE, SALT)
-    values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL}, #{creater,jdbcType=VARCHAR}, 
-      #{createTime,jdbcType=TIMESTAMP}, #{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
-      #{mobileNo,jdbcType=VARCHAR}, #{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR}, 
-      #{type,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
-  </insert>
+		</selectKey>
+		insert into PMS_OPERATOR (ID, VER, CREATER,
+		CREATE_TIME, EDITOR,
+		EDIT_TIME,
+		STATUS, REMARK, REAL_NAME,
+		MOBILE_NO, LOGIN_NAME, LOGIN_PWD,
+		TYPE, SALT)
+		values (#{id,jdbcType=DECIMAL}, #{ver,jdbcType=DECIMAL},
+		#{creater,jdbcType=VARCHAR},
+		#{createTime,jdbcType=TIMESTAMP},
+		#{editor,jdbcType=VARCHAR}, #{editTime,jdbcType=TIMESTAMP},
+		#{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR},
+		#{realName,jdbcType=VARCHAR},
+		#{mobileNo,jdbcType=VARCHAR},
+		#{loginName,jdbcType=VARCHAR}, #{loginPwd,jdbcType=VARCHAR},
+		#{type,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
+	</insert>
 
-	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsOperator">
+	<update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsOperator">
 		update
-		<include refid="pms_operator" />
-		<set>
-		ver = #{ver}+1,
-		creater = #{creater,jdbcType=VARCHAR},
-		create_time = #{createTime,jdbcType=TIMESTAMP},
-		editor = #{editor,jdbcType=VARCHAR},
-		edit_time = #{editTime,jdbcType=TIMESTAMP},
-		remark = #{remark,jdbcType=VARCHAR},
-		status = #{status,jdbcType=VARCHAR},
-		login_name = #{loginName,jdbcType=VARCHAR},
-		login_pwd = #{loginPwd,jdbcType=VARCHAR},
-		real_name = #{realName,jdbcType=VARCHAR},
-		type = #{type,jdbcType=VARCHAR},
-		salt = #{salt,jdbcType=VARCHAR},
-		mobile_no = #{mobileNo,jdbcType=VARCHAR}	
-		</set>
-		<where>
-			id = #{id} and ver = #{ver}
-		</where>
+		PMS_OPERATOR
+		set VER = #{ver,jdbcType=DECIMAL}+1,
+		CREATER =
+		#{creater,jdbcType=VARCHAR},
+		CREATE_TIME =
+		#{createTime,jdbcType=TIMESTAMP},
+		EDITOR = #{editor,jdbcType=VARCHAR},
+		EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+		STATUS =
+		#{status,jdbcType=VARCHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		REAL_NAME = #{realName,jdbcType=VARCHAR},
+		MOBILE_NO =
+		#{mobileNo,jdbcType=VARCHAR},
+		LOGIN_NAME =
+		#{loginName,jdbcType=VARCHAR},
+		LOGIN_PWD =
+		#{loginPwd,jdbcType=VARCHAR},
+		TYPE = #{type,jdbcType=VARCHAR},
+		SALT =
+		#{salt,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=DECIMAL} AND VER =
+		#{ver,jdbcType=DECIMAL}
 	</update>
-
-	<select id="selectByPrimaryKey" parameterType="Long" resultMap="beanMap">
+	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsOperator">
+		update PMS_OPERATOR
+		<set>
+			<if test="ver != null">
+				VER = #{ver,jdbcType=DECIMAL},
+			</if>
+			<if test="creater != null">
+				CREATER = #{creater,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="editor != null">
+				EDITOR = #{editor,jdbcType=VARCHAR},
+			</if>
+			<if test="editTime != null">
+				EDIT_TIME = #{editTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="status != null">
+				STATUS = #{status,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="realName != null">
+				REAL_NAME = #{realName,jdbcType=VARCHAR},
+			</if>
+			<if test="mobileNo != null">
+				MOBILE_NO = #{mobileNo,jdbcType=VARCHAR},
+			</if>
+			<if test="loginName != null">
+				LOGIN_NAME = #{loginName,jdbcType=VARCHAR},
+			</if>
+			<if test="loginPwd != null">
+				LOGIN_PWD = #{loginPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				TYPE = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null">
+				SALT = #{salt,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=DECIMAL}
+	</update>
+	<select id="selectByPrimaryKey" parameterType="Long" resultMap="BaseResultMap">
 		select * from
 		<include refid="pms_operator" />
 		where ID = #{id}
 	</select>
 
-	<select id="findByLoginName" parameterType="string" resultMap="beanMap">
+	<select id="findByLoginName" parameterType="string" resultMap="BaseResultMap">
 		select * from
 		<include refid="pms_operator" />
 		where login_name = #{loginName}
 	</select>
 
-	<select id="listAll" resultMap="beanMap">
+	<select id="listAll" resultMap="BaseResultMap">
 		select * from
 		<include refid="pms_operator" />
 		order by ID
@@ -88,14 +141,15 @@
 
 	<sql id="condition_sql">
 		<!-- Equal query -->
-		<if test="loginName != null and loginName != ''"> and login_name = #{loginName}</if>
-		<if test="status != null and status != ''"> and status = #{status}</if>
-		<if test="type != null and type != ''"> and type = #{type}</if>
+		<if test="loginName != null and loginName != ''"> and LOGIN_NAME = #{loginName}</if>
+		<if test="status != null and status != ''"> and STATUS = #{status}</if>
+		<if test="type != null and type != ''"> and TYPE = #{type}</if>
 		<!-- Like query -->
-		<if test="realName != null and realName != ''"> and REALNAME like CONCAT(CONCAT('%', #{realName}), '%')</if>
+		<if test="realName != null and realName != ''"> and REAL_NAME like CONCAT(CONCAT('%', #{realName}), '%')
+		</if>
 	</sql>
 
-	<select id="listPage" parameterType="java.util.Map" resultMap="beanMap">
+	<select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
 		select * from
 		<include refid="pms_operator" />
 
@@ -106,7 +160,8 @@
 
 	</select>
 
-	<select id="listPageCount" parameterType="java.util.Map" resultType="long">
+	<select id="listPageCount" parameterType="java.util.Map"
+		resultType="long">
 		select count(1) from
 		<include refid="pms_operator" />
 		<where>
@@ -114,7 +169,7 @@
 		</where>
 	</select>
 
-	<select id="listByRoleId" parameterType="Long" resultMap="beanMap">
+	<select id="listByRoleId" parameterType="Long" resultMap="BaseResultMap">
 		select O.* from
 		<include refid="pms_operator" />
 		O LEFT JOIN
