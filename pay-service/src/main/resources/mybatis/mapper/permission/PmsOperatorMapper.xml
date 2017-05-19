@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roncoo.pay.permission.dao.impl.PmsOperatorDaoImpl">
+<mapper namespace="com.zyzf.polymer.pay.permission.dao.impl.PmsOperatorDaoImpl">
 
 	<!-- Pms权限管理：操作员表 -->
 	<sql id="pms_operator"> PMS_OPERATOR </sql>
 	<sql id="pms_role_operator"> PMS_ROLE_OPERATOR </sql>
 
-	<resultMap id="BaseResultMap" type="com.roncoo.pay.permission.entity.PmsOperator">
+	<resultMap id="BaseResultMap" type="com.zyzf.polymer.pay.permission.entity.PmsOperator">
 		<id column="ID" property="id" jdbcType="DECIMAL" />
 		<result column="VER" property="ver" jdbcType="DECIMAL" />
 		<result column="CREATER" property="creater" jdbcType="VARCHAR" />
@@ -22,7 +22,7 @@
 		<result column="TYPE" property="type" jdbcType="VARCHAR" />
 		<result column="SALT" property="salt" jdbcType="VARCHAR" />
 	</resultMap>
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsOperator"
+	<insert id="insert" parameterType="com.zyzf.polymer.pay.permission.entity.PmsOperator"
 		keyProperty="id" useGeneratedKeys="true">
 		<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
 			SELECT SQC_PMS_OPERATOR.NEXTVAL AS ID FROM DUAL
@@ -44,7 +44,7 @@
 		#{type,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR})
 	</insert>
 
-	<update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsOperator">
+	<update id="updateByPrimaryKey" parameterType="com.zyzf.polymer.pay.permission.entity.PmsOperator">
 		update
 		PMS_OPERATOR
 		set VER = #{ver,jdbcType=DECIMAL}+1,
@@ -70,7 +70,7 @@
 		where ID = #{id,jdbcType=DECIMAL} AND VER =
 		#{ver,jdbcType=DECIMAL}
 	</update>
-	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsOperator">
+	<update id="updateByPrimaryKeySelective" parameterType="com.zyzf.polymer.pay.permission.entity.PmsOperator">
 		update PMS_OPERATOR
 		<set>
 			<if test="ver != null">

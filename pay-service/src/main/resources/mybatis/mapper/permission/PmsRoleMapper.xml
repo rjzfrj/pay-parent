@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roncoo.pay.permission.dao.impl.PmsRoleDaoImpl">
+<mapper namespace="com.zyzf.polymer.pay.permission.dao.impl.PmsRoleDaoImpl">
 
 	<!-- Pms权限管理：角色表 -->
 	<sql id="pms_role"> PMS_ROLE </sql>
 	<sql id="pms_role_permission"> PMS_ROLE_PERMISSION </sql>
 
-	<resultMap id="beanMap" type="com.roncoo.pay.permission.entity.PmsRole">
+	<resultMap id="beanMap" type="com.zyzf.polymer.pay.permission.entity.PmsRole">
 
 		<id column="id" property="id" jdbcType="INTEGER" />
 		<result column="ver" property="ver" jdbcType="INTEGER" />
@@ -20,7 +20,7 @@
 		<result column="role_name" property="roleName" jdbcType="VARCHAR" />
 	</resultMap>
 
-<!-- 	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsRole" keyProperty="id" useGeneratedKeys="true">
+<!-- 	<insert id="insert" parameterType="com.zyzf.polymer.pay.permission.entity.PmsRole" keyProperty="id" useGeneratedKeys="true">
 		insert into
 		<include refid="pms_role" />
 
@@ -28,7 +28,7 @@
 		values
 		(#{id},0,#{status},#{creater}, #{createTime}, #{editor},#{editTime},#{remark},#{roleCode},#{roleName})
 	</insert> -->
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsRole" keyProperty="id" useGeneratedKeys="true">
+	<insert id="insert" parameterType="com.zyzf.polymer.pay.permission.entity.PmsRole" keyProperty="id" useGeneratedKeys="true">
 	<selectKey keyProperty="id" order="BEFORE" resultType="java.lang.Long">
 		SELECT SQC_PMS_ROLE.NEXTVAL AS ID FROM DUAL
 	</selectKey>
@@ -41,7 +41,7 @@
       #{status,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{roleCode,jdbcType=VARCHAR}, 
       #{roleName,jdbcType=VARCHAR})
   	</insert>
-<!-- 	<update id="update" parameterType="com.roncoo.pay.permission.entity.PmsRole">
+<!-- 	<update id="update" parameterType="com.zyzf.polymer.pay.permission.entity.PmsRole">
 		update
 		<include refid="pms_role" />
 		<set>
@@ -60,7 +60,7 @@
 			id = #{id} and ver = #{ver}
 		</where>
 	</update> -->
-	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsRole">
+	<update id="updateByPrimaryKeySelective" parameterType="com.zyzf.polymer.pay.permission.entity.PmsRole">
     update PMS_ROLE
     <set>
       <if test="ver != null">
@@ -93,7 +93,7 @@
     </set>
     where ID = #{id,jdbcType=DECIMAL} 
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsRole">
+  <update id="updateByPrimaryKey" parameterType="com.zyzf.polymer.pay.permission.entity.PmsRole">
     update PMS_ROLE
     set VER = #{ver,jdbcType=DECIMAL}+1,
       CREATER = #{creater,jdbcType=VARCHAR},

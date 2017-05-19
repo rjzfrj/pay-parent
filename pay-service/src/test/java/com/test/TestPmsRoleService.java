@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.roncoo.pay.permission.entity.PmsRole;
-import com.roncoo.pay.permission.service.PmsMenuService;
-import com.roncoo.pay.permission.service.PmsRoleService;
+import com.zyzf.polymer.pay.permission.entity.PmsRole;
+import com.zyzf.polymer.pay.permission.service.PmsMenuService;
+import com.zyzf.polymer.pay.permission.service.PmsRoleService;
 
 public class TestPmsRoleService {
 

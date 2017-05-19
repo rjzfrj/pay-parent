@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.roncoo.pay.permission.dao.impl.PmsMenuRoleDaoImpl">
+<mapper namespace="com.zyzf.polymer.pay.permission.dao.impl.PmsMenuRoleDaoImpl">
 
 	<sql id="pms_menu_role"> PMS_MENU_ROLE </sql>
 
-	<!-- <insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsMenuRole"> 
+	<!-- <insert id="insert" parameterType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole"> 
 		<selectKey keyProperty="id" resultType="java.lang.Long" order="BEFORE"> select 
 		SQC_PMS_MENU_ROLE.NEXTVAL AS ID FROM DUAL </selectKey> INSERT INTO <include 
 		refid="pms_menu_role" /> (ID,VER,STATUS,CREATER,CREATE_TIME, EDITOR, EDIT_TIME, 
@@ -13,7 +13,7 @@
 		) </insert> -->
 
 
-	<insert id="insert" parameterType="com.roncoo.pay.permission.entity.PmsMenuRole"
+	<insert id="insert" parameterType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole"
 		useGeneratedKeys="true" keyProperty="id">
 		<selectKey keyProperty="id" resultType="java.lang.Long"
 			order="BEFORE">
@@ -36,7 +36,7 @@
 		<include refid="pms_menu_role" />
 		WHERE ID = #{id}
 	</delete>
-	<update id="updateByPrimaryKey" parameterType="com.roncoo.pay.permission.entity.PmsMenuRole">
+	<update id="updateByPrimaryKey" parameterType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole">
 		update PMS_MENU_ROLE
 		set VER = #{ver,jdbcType=DECIMAL},
 		CREATER = #{creater,jdbcType=VARCHAR},
@@ -49,7 +49,7 @@
 		MENU_ID = #{menuId,jdbcType=DECIMAL}
 		where ID = #{id,jdbcType=DECIMAL}
 	</update>
-	<update id="updateByPrimaryKeySelective" parameterType="com.roncoo.pay.permission.entity.PmsMenuRole">
+	<update id="updateByPrimaryKeySelective" parameterType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole">
 		update PMS_MENU_ROLE
 		<set>
 			<if test="ver != null">
@@ -83,7 +83,7 @@
 		where ID = #{id,jdbcType=DECIMAL}
 	</update>
 	<select id="selectByPrimaryKey" parameterType="string"
-		resultType="com.roncoo.pay.permission.entity.PmsMenuRole">
+		resultType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole">
 		select
 		d.id,d.ver,d.status,d.creater,
 		d.create_time as "createTime",
@@ -98,7 +98,7 @@
 	</select>
 
 	<select id="listByRoleId" parameterType="long"
-		resultType="com.roncoo.pay.permission.entity.PmsMenuRole">
+		resultType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole">
 		select d.id as "id",
 		d.role_id as "roleId",
 		d.menu_id as "menuId"
@@ -109,7 +109,7 @@
 	</select>
 
 	<select id="listPage" parameterType="java.util.Map"
-		resultType="com.roncoo.pay.permission.entity.PmsMenuRole">
+		resultType="com.zyzf.polymer.pay.permission.entity.PmsMenuRole">
 		select d.id as "id",
 		d.role_id as "roleId",
 		d.menu_id as "menuId"
