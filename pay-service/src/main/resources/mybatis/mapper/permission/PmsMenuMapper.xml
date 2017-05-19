@@ -30,7 +30,7 @@
 			ver = #{ver}+1,
 			name = #{name,jdbcType=VARCHAR},
 			url = #{url,jdbcType=VARCHAR},
-			parent_id = #{parent.id,jdbcType=VARCHAR},
+			parent_id = #{parent.id,jdbcType=INTEGER},
 			num = #{num,jdbcType=VARCHAR},
 			is_leaf = #{isLeaf,jdbcType=VARCHAR},
 			lvl =#{lvl,jdbcType=INTEGER},
@@ -106,7 +106,48 @@
 		</where>
 	</select>
 
-	<select id="listByParent" parameterType="Long" resultType="java.util.Map">
+	  <resultMap id="BaseResultMap" type="java.util.HashMap">
+		    <id column="ID" jdbcType="VARCHAR" property="id" />
+		    <result column="VER" jdbcType="DECIMAL" property="ver" />
+		    <result column="STATUS" jdbcType="VARCHAR" property="status" />
+		    <result column="CREATER" jdbcType="VARCHAR" property="creater" />
+		    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+		    <result column="EDITOR" jdbcType="VARCHAR" property="editor" />
+		    <result column="EDIT_TIME" jdbcType="TIMESTAMP" property="editTime" />
+		    <result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		    <result column="PARENT_ID" jdbcType="DECIMAL" property="pId" />
+		    <result column="NAME" jdbcType="VARCHAR" property="name" />
+		    <result column="IS_LEAF" jdbcType="VARCHAR" property="isLeaf" />
+		    <result column="LVL" jdbcType="DECIMAL" property="lvl" />
+		    <result column="TARGET_NAME" jdbcType="VARCHAR" property="targetName" />
+    </resultMap>
+
+	<select id="listByParent" parameterType="Long" resultMap="BaseResultMap">
+		select
+		m.id,
+		m.ver,
+		m.status,
+		m.creater,
+		m.create_time ,
+		m.editor,
+		m.edit_time, 
+		m.remark,
+		m.parent_id,
+		m.name ,
+		m.is_leaf ,
+		m.lvl ,
+		m.target_name
+		from
+		<include refid="pms_menu" />
+		m
+		<where>
+			<if test="parentid!=null and parentid!=''">
+				and m.parent_id = #{parentId}
+			</if>
+		</where>
+		order by m.num asc
+	</select>
+<!-- 	<select id="listByParent" parameterType="Long" resultType="java.util.Map">
 		select
 		m.id,m.ver,m.status,m.creater,
 		m.create_time as "createTime", m.editor,
@@ -125,7 +166,7 @@
 			</if>
 		</where>
 		order by m.num asc
-	</select>
+	</select> -->
 	<select id="listByParentId" parameterType="long" resultType="com.roncoo.pay.permission.entity.PmsMenu">
 		select
 		id as "id" ,
@@ -165,7 +206,7 @@
 		on rm.menu_id = m.id
 		where r.id in
 		<foreach item="item" index="index" collection="list" open="(" separator="," close=")">#{item}</foreach>
-		) as mt order by mt.num asc
+		)  mt order by mt.num asc
 	</select>
 
 </mapper>

@@ -7,8 +7,8 @@
 			<input type="hidden" name="forwardUrl" value="">
 
 			<input type="hidden" id="menuId" name="id" value="${pmsMenu.id }" />
-			<input type="hidden" name="version" value="${pmsMenu.version }" />
-			<input type="hidden" name="level" value="${pmsMenu.level }" />
+			<input type="hidden" name="version" value="${pmsMenu.ver }" />
+			<input type="hidden" name="level" value="${pmsMenu.lvl }" />
 			<input type="hidden" name="isLeaf" value="${pmsMenu.isLeaf }" />
 
 			<p style="width: 99%">
@@ -23,7 +23,7 @@
 			</p>
 			<p style="width: 99%">
 				<label>菜单编号：</label>
-				<input type="text" name="number" class="required number" maxlength="20" value="${pmsMenu.number }" size="30" />
+				<input type="text" name="num" class="required number" maxlength="20" value="${pmsMenu.num }" size="30" />
 			</p>
 			<p style="width: 99%">
 				<label>请求URL：</label>

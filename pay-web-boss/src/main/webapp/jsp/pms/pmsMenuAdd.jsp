@@ -20,7 +20,7 @@
 			</p>
 			<p style="width: 99%">
 				<label>菜单编号：</label>
-				<input type="text" name="number" class="required number" maxlength="20" value="${pmsMenu.number}" />
+				<input type="text" name="num" class="required number" maxlength="20" value="${pmsMenu.num}" />
 			</p>
 			<p style="width: 99%">
 				<label>请求URL：</label>

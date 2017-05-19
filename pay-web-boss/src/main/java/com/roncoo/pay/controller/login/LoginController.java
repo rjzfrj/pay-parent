@@ -202,7 +202,7 @@ public class LoginController extends BaseController {
 			String id = map.get("id").toString();// id
 			String name = map.get("name").toString();// 名称
 			String isLeaf = map.get("isLeaf").toString();// 是否叶子
-			String level = map.get("level").toString();// 菜单层级（1、2、3、4）
+			String level = map.get("lvl").toString();// 菜单层级（1、2、3、4）
 			String url = map.get("url").toString(); // ACTION访问地址
 			String navTabId = "";
 			if (!StringUtil.isEmpty(map.get("targetName"))) {

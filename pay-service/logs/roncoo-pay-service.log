@@ -61,3 +61,67 @@
 [INFO ][2017-05-17 17:57:40,683][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
 [ERROR][2017-05-17 17:57:40,923][DruidDataSource:862] testWhileIdle is true, validationQuery not set
 [INFO ][2017-05-17 17:57:40,942][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 09:29:42,520][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@699c8551: startup date [Thu May 18 09:29:42 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 09:29:42,576][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 09:29:42,912][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 09:29:42,962][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 09:29:43,125][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 09:29:43,125][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 09:29:43,376][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 09:29:43,393][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 11:14:25,628][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@699c8551: startup date [Thu May 18 11:14:25 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 11:14:25,669][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 11:14:25,899][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 11:14:25,938][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 11:14:26,096][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 11:14:26,096][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 11:14:26,344][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 11:14:26,368][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 15:00:34,807][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@22f4bf02: startup date [Thu May 18 15:00:34 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 15:00:34,850][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 15:00:35,075][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 15:00:35,119][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 15:00:35,272][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 15:00:35,273][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 15:00:35,519][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 15:00:35,539][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 15:11:05,330][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@22f4bf02: startup date [Thu May 18 15:11:05 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 15:11:05,372][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 15:11:05,594][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 15:11:05,637][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 15:11:05,797][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 15:11:05,798][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 15:11:06,053][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 15:11:06,071][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 15:17:29,671][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@72282e3b: startup date [Thu May 18 15:17:29 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 15:17:29,714][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 15:17:29,942][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 15:17:29,979][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 15:17:30,142][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 15:17:30,143][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 15:17:30,388][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 15:17:30,406][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 15:21:14,677][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@2bf35e0a: startup date [Thu May 18 15:21:14 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 15:21:14,722][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 15:21:14,959][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 15:21:14,994][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 15:21:15,154][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 15:21:15,154][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 15:21:15,392][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 15:21:15,423][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 15:39:11,400][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@24e6d224: startup date [Thu May 18 15:39:11 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 15:39:11,438][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 15:39:11,641][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 15:39:11,680][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 15:39:11,819][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 15:39:11,820][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 15:39:12,049][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 15:39:12,058][DruidDataSource:722] {dataSource-1} inited
+[INFO ][2017-05-18 15:39:19,850][AbstractApplicationContext:513] Refreshing org.springframework.context.support.ClassPathXmlApplicationContext@22f4bf02: startup date [Thu May 18 15:39:19 CST 2017]; root of context hierarchy
+[INFO ][2017-05-18 15:39:19,890][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-context-service.xml]
+[INFO ][2017-05-18 15:39:20,119][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-mybatis.xml]
+[INFO ][2017-05-18 15:39:20,159][XmlBeanDefinitionReader:316] Loading XML bean definitions from class path resource [spring/spring-activemq.xml]
+[INFO ][2017-05-18 15:39:20,321][PropertiesLoaderSupport:172] Loading properties file from class path resource [mq_config.properties]
+[INFO ][2017-05-18 15:39:20,321][PropertiesLoaderSupport:172] Loading properties file from class path resource [jdbc.properties]
+[ERROR][2017-05-18 15:39:20,582][DruidDataSource:862] testWhileIdle is true, validationQuery not set
+[INFO ][2017-05-18 15:39:20,606][DruidDataSource:722] {dataSource-1} inited

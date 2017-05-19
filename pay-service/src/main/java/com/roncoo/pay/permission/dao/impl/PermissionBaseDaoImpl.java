@@ -22,6 +22,7 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
@@ -252,14 +253,16 @@ public abstract class PermissionBaseDaoImpl<T extends PermissionBaseEntity> exte
 		pageParam.setNumPerPage(numPerPage); // 重新设值
 
 		// 根据页面传来的分页参数构造SQL分页参数
-		paramMap.put("pageFirst", (pageParam.getPageNum() - 1) * pageParam.getNumPerPage());
+		int pageFist=(pageParam.getPageNum() - 1) * pageParam.getNumPerPage();
+		paramMap.put("pageFirst", pageFist);
 		paramMap.put("pageSize", pageParam.getNumPerPage());
 		paramMap.put("startRowNum", (pageParam.getPageNum() - 1) * pageParam.getNumPerPage());
 		paramMap.put("endRowNum", pageParam.getPageNum() * pageParam.getNumPerPage());
 
 		// 获取分页数据集
-		List<Object> list = sessionTemplate.selectList(getStatement(SQL_LIST_PAGE), paramMap);
-
+		//List<Object> list = sessionTemplate.selectList(getStatement(SQL_LIST_PAGE), paramMap);
+		RowBounds rowBounds=new RowBounds(pageFist ,pageParam.getNumPerPage());
+		List<Object> list =sessionTemplate.selectList(getStatement(SQL_LIST_PAGE), paramMap, rowBounds);
 		Object isCount = paramMap.get("isCount"); // 是否统计当前分页条件下的数据：1:是，其他为否
 		if (isCount != null && "1".equals(isCount.toString())) {
 			Map<String, Object> countResultMap = sessionTemplate.selectOne(getStatement(SQL_COUNT_BY_PAGE_PARAM), paramMap);

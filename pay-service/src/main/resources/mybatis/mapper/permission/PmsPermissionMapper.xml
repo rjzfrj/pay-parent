@@ -115,12 +115,12 @@
 		<where>
 			<include refid="condition_sql" />
 		</where>
-		order by create_time desc limit #{pageFirst}, #{pageSize}
+		order by create_time desc 
 	</select>
 
 	<!-- 分页查询时要用到的总数统计 -->
 	<select id="listPageCount" parameterType="java.util.Map" resultType="long">
-		select count(1) from
+		select count(*) from
 		<include refid="pms_permission" />
 		<where>
 			<include refid="condition_sql" />
